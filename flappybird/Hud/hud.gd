@@ -1,9 +1,9 @@
 extends CanvasLayer
 
-
+signal restart
 
 func _on_restart_pressed() -> void:
-	GameManager.restart()
+	restart.emit()
 
 
 func _on_quit_pressed() -> void:

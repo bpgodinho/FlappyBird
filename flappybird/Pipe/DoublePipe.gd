@@ -33,6 +33,11 @@ func get_good_color() -> Vector3:
 	newColor.h = GameManager.color_increment
 	return Vector3(newColor.r,newColor.g,newColor.b)
 
+func stop() -> void:
+	linear_velocity.x = 0
+	top_pipe.linear_velocity.x = 0
+	bottom_pipe.linear_velocity.x = 0
+
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

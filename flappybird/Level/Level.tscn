@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://528dnv6f6mdy"]
+[gd_scene load_steps=15 format=3 uid="uid://528dnv6f6mdy"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_j3k2o"]
 [ext_resource type="PackedScene" uid="uid://bslk2iuphjrsb" path="res://Player/Player.tscn" id="1_oxiwi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cgpsnaqbdqm88" path="res://Hud/hud.tscn" id="5_eim3k"]
 [ext_resource type="Texture2D" uid="uid://dynwl2snvjsuh" path="res://Art/Background.png" id="5_gp3qt"]
 [ext_resource type="Shader" path="res://Shaders/Background.gdshader" id="5_ytfh8"]
+[ext_resource type="Script" path="res://Level/background.gd" id="7_3k13o"]
 
 [sub_resource type="GDScript" id="GDScript_oy6gb"]
 script/source = "class_name ScoreArea extends Area2D
@@ -46,6 +47,7 @@ size = Vector2(480, 20)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uedbp"]
 shader = ExtResource("5_ytfh8")
 shader_parameter/speed = 0.01
+shader_parameter/controlled_time = 0.0
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_j3k2o")
@@ -116,6 +118,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_gp3qt")
 expand_mode = 3
+script = ExtResource("7_3k13o")
+
+[node name="HitEffect" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+top_level = true
+offset_right = 480.0
+offset_bottom = 720.0
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="restart" from="DeathHud" to="." method="_on_death_hud_restart"]
 [connection signal="timeout" from="PipeSpawnTimer" to="." method="_on_pipe_spawn_timer_timeout"]
