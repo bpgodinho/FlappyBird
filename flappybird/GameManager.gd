@@ -8,4 +8,3 @@ func restart() -> void:
 	difficulty = 0.0
 	score = 0
 	color_increment = 0.0
-	get_tree().reload_current_scene()

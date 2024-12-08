@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgpsnaqbdqm88"]
+[gd_scene load_steps=9 format=3 uid="uid://cgpsnaqbdqm88"]
 
 [ext_resource type="Script" path="res://Hud/hud.gd" id="1_lj6mm"]
+[ext_resource type="AudioStream" uid="uid://deax5rg4an1es" path="res://Sounds/countBeep.mp3" id="2_0nq77"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oa62l"]
 font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_3h3q6"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_pqg82"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_pajv3"]
+font_size = 15
 
 [sub_resource type="InputEventKey" id="InputEventKey_nenso"]
 device = -1
@@ -16,20 +26,71 @@ events = [SubResource("InputEventKey_nenso")]
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_lj6mm")
 
-[node name="Title" type="Label" parent="."]
+[node name="YourScore" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = -164.0
-offset_right = 62.0
-offset_bottom = -122.0
+offset_left = -90.0
+offset_top = -209.0
+offset_right = 90.0
+offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "You Lost"
+text = "YOUR SCORE"
 label_settings = SubResource("LabelSettings_oa62l")
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -147.0
+offset_right = 20.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_3h3q6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YourHighscore" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -100.0
+offset_right = 52.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HIGHSCORE"
+label_settings = SubResource("LabelSettings_pqg82")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -73.0
+offset_right = 5.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+label_settings = SubResource("LabelSettings_pajv3")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
@@ -58,5 +119,8 @@ theme_override_font_sizes/font_size = 20
 text = "Main Menu
 "
 
+[node name="ScoreAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0nq77")
+
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

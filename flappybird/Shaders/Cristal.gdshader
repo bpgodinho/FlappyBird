@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec3 newColor;
+uniform vec3 newColor = vec3 (0,0,0);
 
 void vertex() {
 	// Called for every vertex the material is visible on.

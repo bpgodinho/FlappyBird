@@ -6,6 +6,7 @@ extends Node2D
 @onready var pipe_spawn_timer: Timer = $PipeSpawnTimer
 @onready var death_hud: CanvasLayer = $DeathHud
 @onready var hit_effect: ColorRect = $HitEffect
+@onready var cartoon_game_over: AudioStreamPlayer = $CartoonGameOver
 
 @export var score_area: PackedScene
 @export var pipe: PackedScene
@@ -29,6 +30,7 @@ func _on_pipe_spawn_timer_timeout() -> void:
 func _on_player_hit() -> void:
 	tween = create_tween()
 	tween.tween_property(hit_effect, "self_modulate", Color(1,1,1,0),0.1).from(Color(1,1,1,1))
+	cartoon_game_over.play()
 	background.pause(true)
 	get_tree().call_group("pipe","stop")
 	pipe_spawn_timer.stop()
@@ -38,3 +40,4 @@ func _on_player_hit() -> void:
 func _on_death_hud_restart() -> void:
 	background.pause(false)
 	GameManager.restart()
+	get_tree().reload_current_scene()

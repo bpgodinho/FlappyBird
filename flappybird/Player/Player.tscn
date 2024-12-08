@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bslk2iuphjrsb"]
+[gd_scene load_steps=11 format=3 uid="uid://bslk2iuphjrsb"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6rn5d"]
 [ext_resource type="Texture2D" uid="uid://d8iegvpaqdv8" path="res://Art/testeMorcego.png" id="2_ruel2"]
+[ext_resource type="AudioStream" uid="uid://c0ljunrdfyapm" path="res://Sounds/flap.mp3" id="3_ia8mi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_866jr"]
 radius = 13.0
@@ -78,6 +79,10 @@ position = Vector2(9, 0)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_5v6ta")
 animation = &"flap"
+
+[node name="FlapSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ia8mi")
+max_polyphony = 15
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_looped" from="PlayerSprite" to="." method="_on_player_sprite_animation_looped"]
