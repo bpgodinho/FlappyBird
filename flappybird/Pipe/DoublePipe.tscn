@@ -1,114 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://7f80i6fpxc52"]
+[gd_scene load_steps=7 format=3 uid="uid://7f80i6fpxc52"]
 
+[ext_resource type="Shader" path="res://Shaders/Cristal.gdshader" id="1_glimn"]
 [ext_resource type="Script" path="res://Pipe/DoublePipe.gd" id="1_pvs03"]
+[ext_resource type="Texture2D" uid="uid://dnstkhehq5qdx" path="res://Art/Obstacles/Crystal.png" id="2_w1686"]
+[ext_resource type="Texture2D" uid="uid://c5lpsy8p3wwi6" path="res://Art/Obstacles/CrystalConnector.png" id="3_qs7vp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytk4s"]
-size = Vector2(80, 650)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nugo7"]
+resource_local_to_scene = true
+shader = ExtResource("1_glimn")
+shader_parameter/newColor = Vector3(-1, -0.5, -0.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wjr6"]
-size = Vector2(20, 160)
+size = Vector2(20, 140)
 
 [node name="Control" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_nugo7")
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_pvs03")
+textures = Array[Array]([[ExtResource("2_w1686"), ExtResource("3_qs7vp")], [null, null]])
 
 [node name="TopPipe" type="RigidBody2D" parent="."]
-position = Vector2(0, -408)
+use_parent_material = true
+position = Vector2(0, -400)
 collision_mask = 0
 gravity_scale = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
-shape = SubResource("RectangleShape2D_ytk4s")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopPipe"]
+polygon = PackedVector2Array(0, 327, 42, 275, 41, -498, -40, -499, -41, 273)
 
-[node name="Control" type="Control" parent="TopPipe/CollisionShape2D"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -325.0
-offset_right = 40.0
-offset_bottom = 325.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TopPipeSprite" type="Sprite2D" parent="TopPipe"]
+texture_filter = 4
+use_parent_material = true
+position = Vector2(0, -85)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("2_w1686")
+flip_v = true
 
-[node name="ColorRect" type="ColorRect" parent="TopPipe/CollisionShape2D/Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -650.0
-offset_right = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0.738281, 0.0461426, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="TopPipe/CollisionShape2D/Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0.738281, 0.0461426, 1)
+[node name="TopConnector" type="Sprite2D" parent="TopPipe"]
+texture_filter = 4
+use_parent_material = true
+position = Vector2(2, 82)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("3_qs7vp")
+flip_v = true
 
 [node name="BottomPipe" type="RigidBody2D" parent="."]
-position = Vector2(0, 408)
+use_parent_material = true
+position = Vector2(0, 400)
 collision_mask = 0
 gravity_scale = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
-shape = SubResource("RectangleShape2D_ytk4s")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BottomPipe"]
+polygon = PackedVector2Array(0, -327, 42, -275, 42, 500, -41, 500, -42, -272)
 
-[node name="Control" type="Control" parent="BottomPipe/CollisionShape2D"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -325.0
-offset_right = 40.0
-offset_bottom = 325.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BottomPipeSprite" type="Sprite2D" parent="BottomPipe"]
+texture_filter = 4
+use_parent_material = true
+position = Vector2(0, 86)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("2_w1686")
 
-[node name="ColorRect" type="ColorRect" parent="BottomPipe/CollisionShape2D/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 650.0
-grow_horizontal = 2
-color = Color(0, 0.738281, 0.0461426, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="BottomPipe/CollisionShape2D/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
-grow_horizontal = 2
-color = Color(0, 0.738281, 0.0461426, 1)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -21.0
-offset_top = -50.0
-offset_right = 19.0
-offset_bottom = 50.0
+[node name="BottomConnector" type="Sprite2D" parent="BottomPipe"]
+texture_filter = 4
+use_parent_material = true
+position = Vector2(2, -114)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("3_qs7vp")
 
 [node name="ScoreArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -117,4 +75,8 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
 shape = SubResource("RectangleShape2D_3wjr6")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(90, 0)
+
 [connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://be4axw675oxmj"]
+[gd_scene load_steps=5 format=3 uid="uid://be4axw675oxmj"]
 
 [ext_resource type="Script" path="res://Menu/menu.gd" id="1_a43rg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_it7n8"]
 font_size = 40
 font_color = Color(1, 0.65625, 0, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_chbuy"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_ja5pj"]
+events = [SubResource("InputEventKey_chbuy")]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -52,6 +60,7 @@ grow_vertical = 0
 [node name="Play" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+shortcut = SubResource("Shortcut_ja5pj")
 text = "Play"
 
 [node name="BoxContainer" type="BoxContainer" parent="HBoxContainer"]

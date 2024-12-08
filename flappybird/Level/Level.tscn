@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://528dnv6f6mdy"]
+[gd_scene load_steps=14 format=3 uid="uid://528dnv6f6mdy"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_j3k2o"]
 [ext_resource type="PackedScene" uid="uid://bslk2iuphjrsb" path="res://Player/Player.tscn" id="1_oxiwi"]
 [ext_resource type="PackedScene" uid="uid://7f80i6fpxc52" path="res://Pipe/DoublePipe.tscn" id="3_bj56y"]
 [ext_resource type="PackedScene" uid="uid://cgpsnaqbdqm88" path="res://Hud/hud.tscn" id="5_eim3k"]
+[ext_resource type="Texture2D" uid="uid://dynwl2snvjsuh" path="res://Art/Background.png" id="5_gp3qt"]
+[ext_resource type="Shader" path="res://Shaders/Background.gdshader" id="5_ytfh8"]
 
 [sub_resource type="GDScript" id="GDScript_oy6gb"]
 script/source = "class_name ScoreArea extends Area2D
@@ -34,12 +36,16 @@ font_size = 45
 
 [sub_resource type="Curve2D" id="Curve2D_mnfg2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 535, 71, 0, 0, 0, 0, 535, 659)
+"points": PackedVector2Array(0, 0, 0, 0, 533, 165, 0, 0, 0, 0, 533, 555)
 }
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3y63"]
 size = Vector2(480, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uedbp"]
+shader = ExtResource("5_ytfh8")
+shader_parameter/speed = 0.01
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_j3k2o")
@@ -48,7 +54,7 @@ pipe = ExtResource("3_bj56y")
 
 [node name="Player" parent="." instance=ExtResource("1_oxiwi")]
 top_level = true
-position = Vector2(114, 342)
+position = Vector2(121, 342)
 
 [node name="ScoreLabel" type="Label" parent="."]
 top_level = true
@@ -68,11 +74,11 @@ vertical_alignment = 1
 curve = SubResource("Curve2D_mnfg2")
 
 [node name="PipeSpawnPosition" type="PathFollow2D" parent="PipeSpawner"]
-position = Vector2(535, 71)
+position = Vector2(533, 165)
 rotation = 1.5708
 
 [node name="UpperWall" type="RigidBody2D" parent="."]
-position = Vector2(240, -12)
+position = Vector2(240, -46)
 collision_mask = 0
 gravity_scale = 0.0
 
@@ -80,7 +86,7 @@ gravity_scale = 0.0
 shape = SubResource("RectangleShape2D_d3y63")
 
 [node name="LowerWall" type="RigidBody2D" parent="."]
-position = Vector2(240, 734)
+position = Vector2(240, 768)
 collision_mask = 0
 gravity_scale = 0.0
 
@@ -93,6 +99,23 @@ visible = false
 [node name="PipeSpawnTimer" type="Timer" parent="."]
 wait_time = 2.75
 autostart = true
+
+[node name="Background" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_uedbp")
+custom_minimum_size = Vector2(0, 720)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_right = 1809.2
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_gp3qt")
+expand_mode = 3
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="PipeSpawnTimer" to="." method="_on_pipe_spawn_timer_timeout"]

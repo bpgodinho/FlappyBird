@@ -7,7 +7,7 @@ extends RigidBody2D
 signal hit
 
 var dead := false
-var jump_strength: float = -550
+var jump_strength: float = -700
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Jump") and !dead:

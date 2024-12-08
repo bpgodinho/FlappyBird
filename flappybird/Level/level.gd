@@ -8,8 +8,14 @@ extends Node2D
 
 @export var score_area: PackedScene
 @export var pipe: PackedScene
+@onready var background: TextureRect = $Background
+
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_up"):
+		background.material.set_shader_parameter("speed", 0)
+	if Input.is_action_just_pressed("ui_down"):
+		background.material.set_shader_parameter("speed", 1)
 	score_label.text = str(GameManager.score)
 
 func _ready() -> void:

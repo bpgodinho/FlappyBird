@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgpsnaqbdqm88"]
+[gd_scene load_steps=5 format=3 uid="uid://cgpsnaqbdqm88"]
 
 [ext_resource type="Script" path="res://Hud/hud.gd" id="1_lj6mm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oa62l"]
 font_size = 35
+
+[sub_resource type="InputEventKey" id="InputEventKey_nenso"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_uavva"]
+events = [SubResource("InputEventKey_nenso")]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_lj6mm")
@@ -40,6 +48,7 @@ theme_override_constants/separation = 20
 [node name="Restart" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_uavva")
 text = "Restart
 "
 
