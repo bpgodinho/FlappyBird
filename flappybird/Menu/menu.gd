@@ -7,3 +7,8 @@ func _on_play_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_erase_data_pressed() -> void:
+	SaveManager.data.highscore = 0
+	SaveManager.save_game()

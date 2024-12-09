@@ -38,6 +38,7 @@ func _on_player_hit() -> void:
 	if GameManager.score > SaveManager.data.highscore:
 		SaveManager.data.highscore = GameManager.score
 		SaveManager.save_game()
+		death_hud.new_highscore = true
 
 
 func _on_death_hud_restart() -> void:
