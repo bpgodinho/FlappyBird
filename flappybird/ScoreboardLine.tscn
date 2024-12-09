@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcxcl0wkekxo8"]
+
+[ext_resource type="Script" path="res://scoreboard_line.gd" id="1_agjuj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pajv3"]
+font_size = 20
+
+[node name="ScoreboardLine" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_agjuj")
+
+[node name="Highscore" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 6
+label_settings = SubResource("LabelSettings_pajv3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 2

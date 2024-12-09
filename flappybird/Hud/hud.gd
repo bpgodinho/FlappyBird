@@ -5,13 +5,8 @@ signal restart
 @onready var score_audio: AudioStreamPlayer = $ScoreAudio
 @onready var score: Label = $Score
 @onready var win_chime: AudioStreamPlayer = $WinChime
-@onready var highscore: Label = $Highscore
 @onready var your_score: Label = $YourScore
-
-var new_highscore := false
-
-func _ready() -> void:
-	highscore.text = str(SaveManager.data.highscore)
+@onready var leaderboard: VBoxContainer = $Leaderboard
 
 func _on_restart_pressed() -> void:
 	score.text = "0"
@@ -27,12 +22,14 @@ func _on_player_hit() -> void:
 	your_score.text = "YOUR SCORE"
 	await get_tree().create_timer(0.3).timeout
 	score.show()
-	for i in GameManager.score:
-		score.text = str(i + 1)
-		score_audio.play()
-		await get_tree().create_timer(0.1).timeout
-	highscore.text = str(SaveManager.data.highscore)
-	if new_highscore:
+	var tween = create_tween()
+	tween.tween_method(count_up,0,GameManager.score,GameManager.score * 0.1)
+	tween.tween_callback(win_chime.play)
+	if GameManager.new_highscore:
 		your_score.text = "NEW HIGHSCORE!"
-		win_chime.play()
-		new_highscore = false
+		GameManager.new_highscore = false
+
+func count_up(count: int) -> void:
+	if score.text != str(count):
+		score_audio.play()
+		score.text = str(count)

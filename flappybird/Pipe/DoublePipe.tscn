@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://7f80i6fpxc52"]
 
 [ext_resource type="Shader" path="res://Shaders/Cristal.gdshader" id="1_glimn"]
-[ext_resource type="Script" path="res://Pipe/DoublePipe.gd" id="1_pvs03"]
+[ext_resource type="Script" path="res://Pipe/doublePipe.gd" id="1_pvs03"]
 [ext_resource type="Texture2D" uid="uid://dnstkhehq5qdx" path="res://Art/Obstacles/Crystal.png" id="2_w1686"]
 [ext_resource type="Texture2D" uid="uid://c5lpsy8p3wwi6" path="res://Art/Obstacles/CrystalConnector.png" id="3_qs7vp"]
 

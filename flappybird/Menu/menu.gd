@@ -11,4 +11,5 @@ func _on_quit_pressed() -> void:
 
 func _on_erase_data_pressed() -> void:
 	SaveManager.data.highscore = 0
+	SaveManager.data.clear_leaderboard()
 	SaveManager.save_game()

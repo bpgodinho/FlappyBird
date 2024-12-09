@@ -35,10 +35,8 @@ func _on_player_hit() -> void:
 	get_tree().call_group("pipe","stop")
 	pipe_spawn_timer.stop()
 	death_hud.show()
-	if GameManager.score > SaveManager.data.highscore:
-		SaveManager.data.highscore = GameManager.score
-		SaveManager.save_game()
-		death_hud.new_highscore = true
+	SaveManager.data.update_leaderboard()
+	death_hud.leaderboard.reload()
 
 
 func _on_death_hud_restart() -> void:
