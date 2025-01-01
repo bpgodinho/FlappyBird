@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name Leaderboard extends VBoxContainer
 
 
 func reload() -> void:
@@ -12,10 +12,13 @@ func timestamp_to_timed_diff(timestamp: int) -> String:
 	if time_diff < 10:
 		return("Just now")
 	if time_diff < 60:
-		return(str(time_diff) + " seconds ago")
+		return(str(time_diff) + " S AGO")
 	elif time_diff < 3540:
-		return(str(ceil(time_diff/60)) + " minutes ago")
+		@warning_ignore("integer_division")
+		return(str(ceil(time_diff/60)) + " M AGO")
 	elif time_diff < 86376:
-		return(str(ceil(time_diff/60/60)) + " hours ago")
+		@warning_ignore("integer_division")
+		return(str(ceil(time_diff/60/60)) + " H AGO")
 	else:
-		return(str(ceil(time_diff/60/60/24)) + " days ago")
+		@warning_ignore("integer_division")
+		return(str(ceil(time_diff/60/60/24)) + " D AGO")

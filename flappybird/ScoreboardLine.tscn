@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcxcl0wkekxo8"]
+[gd_scene load_steps=5 format=3 uid="uid://bcxcl0wkekxo8"]
 
 [ext_resource type="Script" path="res://scoreboard_line.gd" id="1_agjuj"]
+[ext_resource type="FontFile" uid="uid://clb4g8drop6p6" path="res://Fonts/Cave-Stone.ttf" id="2_fq62v"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_pajv3"]
+[sub_resource type="LabelSettings" id="LabelSettings_k8gxj"]
+font = ExtResource("2_fq62v")
+font_size = 25
+font_color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_di3bq"]
+font = ExtResource("2_fq62v")
 font_size = 20
+font_color = Color(0.137255, 0.137255, 0.137255, 1)
 
 [node name="ScoreboardLine" type="HBoxContainer"]
 anchors_preset = 10
@@ -18,9 +26,10 @@ script = ExtResource("1_agjuj")
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 6
-label_settings = SubResource("LabelSettings_pajv3")
+label_settings = SubResource("LabelSettings_k8gxj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Time" type="Label" parent="."]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_di3bq")

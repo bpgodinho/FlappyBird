@@ -5,8 +5,8 @@ extends Resource
 @export var leaderboard :Array[Vector2i]
 
 func update_leaderboard():
-	print("update")
 	var inserted := false
+	@warning_ignore("narrowing_conversion")
 	var vector = Vector2i(GameManager.score,Time.get_unix_time_from_system())
 	for i in leaderboard.size():
 		if leaderboard[i].x < GameManager.score:

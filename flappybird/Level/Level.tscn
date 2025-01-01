@@ -1,21 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://528dnv6f6mdy"]
+[gd_scene load_steps=17 format=3 uid="uid://528dnv6f6mdy"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_j3k2o"]
 [ext_resource type="PackedScene" uid="uid://bslk2iuphjrsb" path="res://Player/Player.tscn" id="1_oxiwi"]
-[ext_resource type="PackedScene" uid="uid://7f80i6fpxc52" path="res://Pipe/DoublePipe.tscn" id="3_bj56y"]
+[ext_resource type="PackedScene" uid="uid://7f80i6fpxc52" path="res://Pipe/DoublePipe.tscn" id="2_8f002"]
 [ext_resource type="PackedScene" uid="uid://cgpsnaqbdqm88" path="res://Hud/Hud.tscn" id="5_eim3k"]
 [ext_resource type="Texture2D" uid="uid://dynwl2snvjsuh" path="res://Art/Background.png" id="5_gp3qt"]
 [ext_resource type="Shader" path="res://Shaders/Background.gdshader" id="5_ytfh8"]
 [ext_resource type="Script" path="res://Level/background.gd" id="7_3k13o"]
 [ext_resource type="AudioStream" uid="uid://boguciqovsmsv" path="res://Sounds/cartoonHit.mp3" id="8_l6nr6"]
+[ext_resource type="AudioStream" uid="uid://bwypcusx3jwaj" path="res://Sounds/music.mp3" id="9_t6uif"]
 
 [sub_resource type="GDScript" id="GDScript_oy6gb"]
-script/source = "class_name ScoreArea extends Area2D
-
-func _on_body_entered(body: Node2D) -> void:
-	GameManager.score += 1
-	GameManager.difficulty = clamp(float(GameManager.score)/100.0,0,1)
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bt2m8"]
 size = Vector2(50, 1)
@@ -53,7 +48,7 @@ shader_parameter/controlled_time = 0.0
 [node name="Level" type="Node2D"]
 script = ExtResource("1_j3k2o")
 score_area = SubResource("PackedScene_nsoxu")
-pipe = ExtResource("3_bj56y")
+pipe_scene = ExtResource("2_8f002")
 
 [node name="Player" parent="." instance=ExtResource("1_oxiwi")]
 top_level = true
@@ -101,22 +96,13 @@ visible = false
 
 [node name="PipeSpawnTimer" type="Timer" parent="."]
 wait_time = 2.75
-autostart = true
 
 [node name="Background" type="TextureRect" parent="."]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_uedbp")
 custom_minimum_size = Vector2(0, 720)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_right = 1809.2
+offset_right = 1843.2
 offset_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
 texture = ExtResource("5_gp3qt")
 expand_mode = 3
 script = ExtResource("7_3k13o")
@@ -129,6 +115,10 @@ offset_bottom = 720.0
 
 [node name="CartoonGameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_l6nr6")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_t6uif")
+volume_db = -10.0
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="hit" from="Player" to="DeathHud" method="_on_player_hit"]

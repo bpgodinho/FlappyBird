@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://be4axw675oxmj"]
+[gd_scene load_steps=13 format=3 uid="uid://be4axw675oxmj"]
 
 [ext_resource type="Script" path="res://Menu/menu.gd" id="1_fup3w"]
+[ext_resource type="FontFile" uid="uid://clb4g8drop6p6" path="res://Fonts/Cave-Stone.ttf" id="3_18wl8"]
+[ext_resource type="Texture2D" uid="uid://dynwl2snvjsuh" path="res://Art/Background.png" id="3_x36xe"]
+[ext_resource type="Texture2D" uid="uid://dqrxtgmclg7pi" path="res://Art/button.png" id="4_vcyb0"]
+[ext_resource type="AudioStream" uid="uid://cafsh542wemaf" path="res://Sounds/btnClick.mp3" id="5_qdyve"]
+[ext_resource type="Texture2D" uid="uid://bsmjb0nhjq2hj" path="res://Art/Tablet.png" id="6_bv2pl"]
+[ext_resource type="PackedScene" uid="uid://v8y2r1ao83f6" path="res://Leaderboard.tscn" id="6_yo78l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_it7n8"]
-font_size = 40
+font = ExtResource("3_18wl8")
+font_size = 87
 font_color = Color(1, 0.65625, 0, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_chbuy"]
@@ -14,6 +21,14 @@ unicode = 32
 [sub_resource type="Shortcut" id="Shortcut_ja5pj"]
 events = [SubResource("InputEventKey_chbuy")]
 
+[sub_resource type="Gradient" id="Gradient_6lov8"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.435294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ldfxl"]
+gradient = SubResource("Gradient_6lov8")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -22,6 +37,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fup3w")
+
+[node name="Background" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 720)
+layout_mode = 1
+offset_right = 1843.2
+offset_bottom = 720.0
+texture = ExtResource("3_x36xe")
+expand_mode = 3
+stretch_mode = 4
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -42,35 +66,74 @@ label_settings = SubResource("LabelSettings_it7n8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(300, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -199.0
+offset_top = 117.0
 offset_right = 150.0
-offset_bottom = -168.0
+offset_bottom = 223.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+theme_override_constants/separation = 25
 
-[node name="Play" type="Button" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.136719, 0.136719, 0.136719, 1)
+theme_override_constants/icon_max_width = 140
+theme_override_fonts/font = ExtResource("3_18wl8")
+theme_override_font_sizes/font_size = 22
 shortcut = SubResource("Shortcut_ja5pj")
-text = "Play"
+text = "PLAY"
+icon = ExtResource("4_vcyb0")
+flat = true
+icon_alignment = 1
 
-[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Quit" type="Button" parent="HBoxContainer"]
+[node name="LeaderboardButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Quit"
+focus_mode = 0
+theme_override_colors/font_color = Color(0.137255, 0.137255, 0.137255, 1)
+theme_override_constants/icon_max_width = 140
+theme_override_fonts/font = ExtResource("3_18wl8")
+theme_override_font_sizes/font_size = 22
+text = "RANKING"
+icon = ExtResource("4_vcyb0")
+flat = true
+icon_alignment = 1
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.137255, 0.137255, 0.137255, 1)
+theme_override_constants/icon_max_width = 140
+theme_override_fonts/font = ExtResource("3_18wl8")
+theme_override_font_sizes/font_size = 22
+text = "QUIT"
+icon = ExtResource("4_vcyb0")
+flat = true
+icon_alignment = 1
 
 [node name="EraseData" type="Button" parent="."]
 layout_mode = 1
@@ -84,6 +147,46 @@ offset_bottom = -10.0
 grow_vertical = 0
 text = "ERASE DATA"
 
-[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="buttonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qdyve")
+
+[node name="Darken" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ldfxl")
+
+[node name="LeaderboardBack" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="Tablet" type="Sprite2D" parent="LeaderboardBack"]
+position = Vector2(240, 360)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_bv2pl")
+
+[node name="Leaderboard" parent="LeaderboardBack" instance=ExtResource("6_yo78l")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = -156.0
+offset_bottom = 156.0
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LeaderboardButton" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="EraseData" to="." method="_on_erase_data_pressed"]
+[connection signal="pressed" from="LeaderboardBack" to="." method="_on_leaderboard_back_pressed"]

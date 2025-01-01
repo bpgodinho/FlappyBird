@@ -6,7 +6,6 @@ var data := SaveData.new()
 
 func _ready() -> void:
 	load_game()
-	print("loaded")
 	print(data.leaderboard)
 
 
@@ -16,6 +15,5 @@ func load_game() -> void:
 
 
 func save_game() -> void:
-	print("saved")
 	print(data.leaderboard)
 	ResourceSaver.save(data,SAVE_PATH)

@@ -4,13 +4,14 @@ var difficulty := 0.0
 var score := 0
 var color_increment := 0.0
 var new_highscore := false
+var first_start := true
 
 func restart() -> void:
 	difficulty = 0.0
 	score = 0
 	color_increment = 0.0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
 		print(SaveManager.data.leaderboard)
 	if Input.is_action_just_pressed("ui_down"):

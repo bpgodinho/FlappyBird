@@ -21,9 +21,6 @@ func _ready() -> void:
 	bottom_pipe.linear_velocity.x = move_speed
 	linear_velocity.x = move_speed
 
-func _on_score_area_body_entered(body: Node2D) -> void:
-	GameManager.score += 1
-
 
 func get_good_color() -> Vector3:
 	var newColor: Color = Color.WHITE
@@ -41,3 +38,7 @@ func stop() -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
+
+func _on_score_area_body_entered(_body: Node2D) -> void:
+	GameManager.score += 1 
